@@ -1,0 +1,7 @@
+# ai-trading skill 工具层依赖（全免费，无需 API key）
+akshare>=1.17.0
+yfinance>=0.2.63
+stockstats>=0.6.5
+pandas>=2.0.0,<3.0.0
+weasyprint>=60.0
+markdown>=3.4.0

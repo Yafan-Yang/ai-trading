@@ -1,0 +1,12 @@
+ai-trading
+Copyright 2026 Yangyafan
+
+本项目是对「多智能体股票分析」思想的独立重实现（skill 版），灵感与流程参考：
+
+- TradingAgents-CN — https://github.com/hsliuping/TradingAgents-CN
+- TradingAgents (Tauric Research，上游原始框架) — https://github.com/TauricResearch/TradingAgents
+
+本项目代码为独立编写，未包含上述项目的源代码。多智能体分析流程（分析师 / 多空辩论 /
+交易员 / 风险辩论 / 风险经理）为对上述项目公开设计思想的再实现。
+
+本项目仅用于研究和教育目的，不构成任何投资建议。
