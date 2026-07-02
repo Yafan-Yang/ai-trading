@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# 安装 ai-trading skills 到 Codex
+# 安装 ai-trading skills 到 Codex（使用符号链接）
 # 用法：bash scripts/install-codex.sh
 
 set -euo pipefail
@@ -24,33 +24,49 @@ else
     echo "✓ 虚拟环境已存在"
 fi
 
-# 2) 生成 Codex skills
+# 2) 生成 Codex skills（存储到工具目录）
 echo "🔄 生成 Codex 格式..."
 python3 "$ROOT/scripts/sync-skills.py"
 
-# 3) 复制到 Codex 目录
-mkdir -p "$CODEX_DIR"
+# 将生成的 skills 复制到工具目录（单一来源）
+mkdir -p "$HOME_DIR/codex-skills"
 for skill_dir in "$ROOT"/codex-skills/*; do
   [ -d "$skill_dir" ] || continue
   name="$(basename "$skill_dir")"
-  rm -rf "$CODEX_DIR/ai-trading-$name"
-  cp -R "$skill_dir" "$CODEX_DIR/ai-trading-$name"
+  rm -rf "$HOME_DIR/codex-skills/$name"
+  cp -R "$skill_dir" "$HOME_DIR/codex-skills/$name"
 
   # 替换工具路径占位符
-  if [ -f "$CODEX_DIR/ai-trading-$name/SKILL.md" ]; then
-    sed -i.bak "s#__AITRADING_HOME__#$HOME_DIR#g" "$CODEX_DIR/ai-trading-$name/SKILL.md"
-    rm -f "$CODEX_DIR/ai-trading-$name/SKILL.md.bak"
+  if [ -f "$HOME_DIR/codex-skills/$name/SKILL.md" ]; then
+    sed -i.bak "s#__AITRADING_HOME__#$HOME_DIR#g" "$HOME_DIR/codex-skills/$name/SKILL.md"
+    rm -f "$HOME_DIR/codex-skills/$name/SKILL.md.bak"
   fi
 done
 
+# 3) 创建符号链接到 Codex 目录
+mkdir -p "$CODEX_DIR"
+for skill_dir in "$HOME_DIR"/codex-skills/*; do
+  [ -d "$skill_dir" ] || continue
+  name="$(basename "$skill_dir")"
+  target_link="$CODEX_DIR/ai-trading-$name"
+
+  # 删除旧的（文件或链接）
+  rm -rf "$target_link"
+
+  # 创建符号链接
+  ln -s "$skill_dir" "$target_link"
+done
+
 echo ""
-echo "✅ Codex 安装完成！"
+echo "✅ Codex 安装完成（使用符号链接）！"
 echo ""
-echo "📚 Skills 已安装到: $CODEX_DIR"
-echo "   ai-trading-analyze"
-echo "   ai-trading-quick"
-echo "   ai-trading-market"
-echo "   ... 等 9 个 skills"
+echo "📚 源文件位置: $HOME_DIR/codex-skills/"
+echo "🔗 符号链接位置: $CODEX_DIR/ai-trading-*"
+echo ""
+echo "💡 优点："
+echo "   • 只存储一份文件，节省空间"
+echo "   • 修改源文件后自动同步"
+echo "   • 更新时只需重新运行 sync-skills.py"
 echo ""
 echo "🔄 请重启 Codex 以加载新 skills"
 echo ""
