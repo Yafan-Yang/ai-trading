@@ -1,0 +1,38 @@
+{
+  "name": "ai-trading",
+  "version": "1.0.0",
+  "description": "AI-powered multi-agent stock analysis skills for A-share, Hong Kong, and US markets",
+  "keywords": [
+    "ai-agent",
+    "stock-analysis",
+    "trading",
+    "multi-agent",
+    "claude-code",
+    "codex",
+    "agent-skills"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Yafan-Yang/ai-trading.git"
+  },
+  "author": "Yangyafan",
+  "license": "Apache-2.0",
+  "homepage": "https://github.com/Yafan-Yang/ai-trading#readme",
+  "scripts": {
+    "sync": "python3 scripts/sync-skills.py",
+    "install:claude": "bash scripts/install-claude.sh",
+    "install:codex": "bash scripts/install-codex.sh",
+    "install:standard": "bash scripts/install-standard.sh"
+  },
+  "files": [
+    ".agents/skills",
+    "codex-skills",
+    "tools",
+    "scripts",
+    "requirements.txt",
+    "setup.sh"
+  ],
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}

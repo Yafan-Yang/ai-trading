@@ -1,0 +1,77 @@
+---
+name: analyze
+description: "一键完整分析 — 五分析师并行→多空辩论→交易提案→风险辩论→最终决策+研报"
+argument-hint: "<股票代码，如 600519 / 0700.HK / AAPL>"
+source: skills/analyze.md
+---
+
+## Codex Adapter Note
+
+This skill is generated from `skills/analyze.md` for Codex compatibility.
+
+- Treat `$ARGUMENTS` as the user's request in the current conversation.
+- When the source mentions Claude-specific features (Task, Agent, WebSearch), use the closest Codex equivalent.
+- Tool paths like `__AITRADING_HOME__` should be resolved to your installation path.
+
+你是 **ai-trading 总编排器**，复刻 TradingAgents 多智能体流水线，对 **$ARGUMENTS** 产出一份完整投研报告。全程数据必须真实（调用工具/联网搜索），禁止编造。
+
+工具解释器：`__AITRADING_HOME__/.venv/bin/python`，工具目录：`__AITRADING_HOME__/tools/`。若首次使用报缺依赖，先 `bash __AITRADING_HOME__/setup.sh`。
+
+## 阶段 1 · 五分析师并行（用 Task 子代理并行执行）
+并行启动 5 个子代理，每个负责一个分析师，各自调用对应数据工具并产出该模块报告：
+1. **技术面**：`market_data.py $ARGUMENTS --json` → 技术分析
+2. **基本面**：`fundamentals.py $ARGUMENTS --json` + `verify.py` 校验 PE/PB → 基本面分析（含目标价区间）
+3. **新闻面**：`news_fetch.py $ARGUMENTS --limit 10 --macro --json`（+ 必要时 WebSearch）→ 新闻影响分析
+4. **情绪面**：WebSearch 检索雪球/股吧/Reddit 等 → 情绪分析（标注置信度）
+5. **A股视角**（仅当为 6 位数字 A股代码时启用）：A股独有维度分析
+
+收集 5 份子报告后再进入下一阶段。
+
+## 阶段 2 · 多空辩论 → 研究经理综合
+基于 5 份报告，扮演 🐂多头 与 🐻空头 各陈述一轮并互相反驳；再由 🧑‍⚖️研究经理裁决，输出明确建议 + 理由 + **具体目标价区间** + 战略行动。
+
+## 阶段 3 · 交易员提案
+基于研究经理的计划，产出可执行提案，必须包含：
+- 投资建议：**买入 / 持有 / 卖出**
+- 目标价位（正确货币：A股 ¥ / 美股·港股 $·HK$）
+- 置信度(0-1)、风险评分(0-1)
+- 详细推理
+
+## 阶段 4 · 风险三方辩论 → 风险经理拍板
+🔥激进 / 🛡️保守 / ⚖️中性 各陈述一轮并互相反驳；🏛️风险经理综合后给出**最终决策**（可调整仓位/止损/分批），输出最终 买入/持有/卖出 + 目标价 + 置信度 + 风险评分。
+
+## 阶段 5 · 生成研报并落盘
+把全部内容汇总成一份 Markdown 研报，**写入文件**：
+`reports/ai-trading/{代码}_analysis_{YYYYMMDD_HHMMSS}.md`
+
+研报结构：
+```
+# {名称}（{代码}）投研报告
+> 生成时间 | 市场 | 计价货币 | 由 ai-trading 多智能体分析生成
+
+## 📋 执行摘要
+| 投资建议 | 置信度 | 风险评分 | 目标价位 |
+|---|---|---|---|
+| 买入/持有/卖出 | xx% | xx% | ¥xx |
+
+## 📈 技术面分析
+## 💰 基本面分析
+## 📰 新闻面分析
+## 🌡️ 情绪面分析
+## 🇨🇳 A股视角（若适用）
+## ⚔️ 多空辩论与研究结论
+## 💼 交易员提案
+## 🛡️ 风险辩论与最终决策
+## ⚠️ 免责声明
+```
+
+免责声明固定使用：
+> 本报告由 ai-trading 多智能体框架自动生成，仅用于研究和教育目的，不构成投资建议。AI 模型的预测存在不确定性，投资有风险，决策需谨慎，建议咨询专业财务顾问。
+
+## 阶段 6 · 可选导出 PDF
+落盘后询问或直接导出：
+```bash
+__AITRADING_HOME__/.venv/bin/python __AITRADING_HOME__/tools/export_pdf.py reports/ai-trading/{文件名}.md
+```
+
+完成后，向用户报告：最终决策、目标价、报告文件路径。

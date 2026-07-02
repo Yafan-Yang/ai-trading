@@ -1,41 +1,103 @@
 #!/usr/bin/env bash
-# 全局安装 ai-trading skill：
-#   1) 把工具 + 依赖部署到工具家目录（默认 ~/.ai-trading），并建好 venv；
-#   2) 把命令安装到 Claude Code 全局命令目录（默认 ~/.claude/commands/ai-trading），
-#      并把命令里的 __AITRADING_HOME__ 占位符替换成工具家目录的绝对路径。
-# 安装后可在任意项目里使用 /ai-trading:analyze <代码> 等命令。
-#
-# 可用环境变量覆盖：
-#   AITRADING_HOME       工具家目录（默认 $HOME/.ai-trading）
-#   CLAUDE_COMMANDS_DIR  Claude 命令根目录（默认 $HOME/.claude/commands）
+# AI Trading 统一安装脚本
+# 自动检测并安装到所有可用的智能体平台
+
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-HOME_DIR="${AITRADING_HOME:-$HOME/.ai-trading}"
-CMD_DIR="${CLAUDE_COMMANDS_DIR:-$HOME/.claude/commands}/ai-trading"
 
-echo "🏠 工具家目录: $HOME_DIR"
-echo "🧩 命令目录:   $CMD_DIR"
+echo "╔═══════════════════════════════════════════════════════╗"
+echo "║     AI Trading - 多智能体选股分析 Skill 安装程序       ║"
+echo "╚═══════════════════════════════════════════════════════╝"
+echo ""
 
-# 1) 部署工具与依赖清单
-mkdir -p "$HOME_DIR/tools"
-cp "$ROOT"/tools/*.py "$HOME_DIR/tools/"
-cp "$ROOT/requirements.txt" "$ROOT/setup.sh" "$HOME_DIR/"
-chmod +x "$HOME_DIR/setup.sh"
+# 检测可用的智能体
+DETECTED_AGENTS=()
 
-# 2) 建 venv（在家目录内）
-bash "$HOME_DIR/setup.sh"
+if [ -d "$HOME/.claude" ]; then
+    DETECTED_AGENTS+=("claude-code")
+fi
 
-# 3) 安装命令并改写占位符
-mkdir -p "$CMD_DIR"
-for f in "$ROOT"/skills/*.md; do
-  sed "s#__AITRADING_HOME__#$HOME_DIR#g" "$f" > "$CMD_DIR/$(basename "$f")"
+if [ -d "$HOME/.codex" ]; then
+    DETECTED_AGENTS+=("codex")
+fi
+
+if [ -d "$HOME/.cursor" ]; then
+    DETECTED_AGENTS+=("cursor")
+fi
+
+if [ -d "$HOME/.agents" ]; then
+    DETECTED_AGENTS+=("standard-agents")
+fi
+
+if [ ${#DETECTED_AGENTS[@]} -eq 0 ]; then
+    echo "⚠️  未检测到已安装的智能体"
+    echo ""
+    echo "推荐使用 skills.sh CLI 安装（支持 70+ 智能体）："
+    echo "   bash scripts/install-standard.sh"
+    echo ""
+    exit 0
+fi
+
+echo "🔍 检测到以下智能体："
+for agent in "${DETECTED_AGENTS[@]}"; do
+    echo "   ✓ $agent"
 done
+echo ""
+
+# 询问用户想要安装到哪些平台
+echo "请选择安装方式："
+echo ""
+echo "  1) 安装到所有检测到的智能体"
+echo "  2) 仅安装到 Claude Code"
+echo "  3) 仅安装到 Codex"
+echo "  4) 使用 skills.sh 标准格式（推荐，兼容性最好）"
+echo "  5) 退出"
+echo ""
+read -p "请输入选项 (1-5): " choice
+
+case $choice in
+    1)
+        echo ""
+        echo "📦 安装到所有检测到的智能体..."
+        echo ""
+
+        for agent in "${DETECTED_AGENTS[@]}"; do
+            case $agent in
+                claude-code)
+                    bash "$ROOT/scripts/install-claude.sh"
+                    ;;
+                codex)
+                    bash "$ROOT/scripts/install-codex.sh"
+                    ;;
+                *)
+                    ;;
+            esac
+        done
+
+        bash "$ROOT/scripts/install-standard.sh"
+        ;;
+    2)
+        bash "$ROOT/scripts/install-claude.sh"
+        ;;
+    3)
+        bash "$ROOT/scripts/install-codex.sh"
+        ;;
+    4)
+        bash "$ROOT/scripts/install-standard.sh"
+        ;;
+    5)
+        echo "❌ 安装已取消"
+        exit 0
+        ;;
+    *)
+        echo "❌ 无效选项"
+        exit 1
+        ;;
+esac
 
 echo ""
-echo "✅ 安装完成！在任意项目里可用："
-echo "   /ai-trading:analyze 600519      # 完整多智能体研报"
-echo "   /ai-trading:quick AAPL          # 快照"
-echo "   /ai-trading:market 0700.HK      # 单角色分析师"
+echo "╔═══════════════════════════════════════════════════════╗"
+echo "║               🎉 安装完成！                           ║"
+echo "╚═══════════════════════════════════════════════════════╝"
 echo ""
-echo "ℹ️  PDF 导出为可选功能，macOS 需一次性安装: brew install pango gdk-pixbuf libffi"
