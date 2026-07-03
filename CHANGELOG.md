@@ -52,15 +52,60 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Support for custom installation directories via `AITRADING_HOME`
 - Configurable caching via `AITRADING_CACHE` and `AITRADING_NOCACHE`
 
+## [1.1.0] - 2026-07-03
+
+### Added
+- **Bias detection tool** (`bias_check.py`) - Quality control for investment decisions
+  - 8 quick rejection rules (Munger's principles)
+    - Benford's Law financial data validation
+    - Business clarity test (5-sentence rule)
+    - Management integrity check
+    - Industry ceiling assessment
+    - Moat clarity verification
+    - Valuation sanity check
+    - Market consensus risk detection
+    - Mirror test (Duan Yongping's principle)
+  - Inverse analysis - force thinking about failure scenarios
+  - Information richness grading (A/B/C levels)
+  - Comprehensive risk assessment with position sizing recommendations
+  - 20 unit tests with 100% pass rate
+- **Enhanced report template** with tiered recommendations
+  - Three investor profiles: Aggressive (🚀) / Balanced (🎯) / Conservative (🛡️)
+  - Separate recommendations, target prices, and position sizes for each profile
+  - Mirror test result in executive summary
+  - Information richness grade displayed prominently
+  - New "Quality Control" section in reports with:
+    - Bias detection checklist results
+    - Inverse analysis - failure scenarios
+    - Information richness breakdown
+    - Comprehensive risk rating
+- **Stage 4.5 in analyze skill** - Quality control checkpoint
+  - Automated bias check before final decision
+  - Integration with risk manager's final call
+  - Structured output in research reports
+- **Test suite** for bias detection
+  - `tests/test_bias_check.py` with 20 test cases
+  - Covers all 8 rejection rules
+  - Tests information grading logic
+  - Validates inverse analysis
+
+### Changed
+- `skills/analyze.md` - Added Stage 4.5 (bias checking) between risk debate and report generation
+- Research report structure - Now includes Quality Control section with bias checks
+- Executive summary format - Now shows tiered recommendations table instead of single row
+
+### Technical
+- All calculations in `bias_check.py` use `decimal.Decimal` for precision
+- Chi-square test for Benford's Law validation (threshold: 15.51 at 0.05 significance)
+- No external dependencies - uses Python standard library only
+
 ## [Unreleased]
 
 ### Planned
-- Bias detection tool (`bias_check.py`) - 8 quick rejection rules + inverse analysis
-- Enhanced report template with tiered recommendations (aggressive/balanced/conservative)
-- Information richness rating (A/B/C grade)
-- Industry screening skill
-- Moat analysis skill  
-- Portfolio alert monitoring skill
+- Industry screening skill (`industry-scan.md`)
+- Moat analysis skill (`moat-analysis.md`)
+- Portfolio alert monitoring skill (`alert-monitor.md`)
+- Multi-source cross-verification tool (`cross_verify.py`)
 
 ---
 
