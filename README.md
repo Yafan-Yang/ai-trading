@@ -154,7 +154,7 @@ bash scripts/install-codex.sh
 
 重启 Codex 后生效。使用：自然语言调用，例如 "使用 ai-trading analyze 分析腾讯"
 
-### skills.sh
+### 通用安装（推荐）
 
 支持 Claude Code、Codex、Cursor、OpenCode、Cline、Windsurf 等 70+ 智能体。
 
@@ -285,7 +285,7 @@ bash setup.sh
 # 测试工具
 bash smoke_test.sh
 
-# 修改 skills 后重新生成多平台格式
+# 修改 skills 后重新生成标准格式
 python3 scripts/sync-skills.py
 ```
 

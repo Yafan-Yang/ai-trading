@@ -24,28 +24,28 @@ else
     echo "✓ 虚拟环境已存在"
 fi
 
-# 2) 生成 Codex skills（存储到工具目录）
-echo "🔄 生成 Codex 格式..."
+# 2) 生成标准格式 skills（存储到工具目录）
+echo "🔄 生成标准格式..."
 python3 "$ROOT/scripts/sync-skills.py"
 
 # 将生成的 skills 复制到工具目录（单一来源）
-mkdir -p "$HOME_DIR/codex-skills"
-for skill_dir in "$ROOT"/codex-skills/*; do
+mkdir -p "$HOME_DIR/skills"
+for skill_dir in "$ROOT"/.agents/skills/*; do
   [ -d "$skill_dir" ] || continue
   name="$(basename "$skill_dir")"
-  rm -rf "$HOME_DIR/codex-skills/$name"
-  cp -R "$skill_dir" "$HOME_DIR/codex-skills/$name"
+  rm -rf "$HOME_DIR/skills/$name"
+  cp -R "$skill_dir" "$HOME_DIR/skills/$name"
 
   # 替换工具路径占位符
-  if [ -f "$HOME_DIR/codex-skills/$name/SKILL.md" ]; then
-    sed -i.bak "s#__AITRADING_HOME__#$HOME_DIR#g" "$HOME_DIR/codex-skills/$name/SKILL.md"
-    rm -f "$HOME_DIR/codex-skills/$name/SKILL.md.bak"
+  if [ -f "$HOME_DIR/skills/$name/SKILL.md" ]; then
+    sed -i.bak "s#__AITRADING_HOME__#$HOME_DIR#g" "$HOME_DIR/skills/$name/SKILL.md"
+    rm -f "$HOME_DIR/skills/$name/SKILL.md.bak"
   fi
 done
 
 # 3) 创建符号链接到 Codex 目录
 mkdir -p "$CODEX_DIR"
-for skill_dir in "$HOME_DIR"/codex-skills/*; do
+for skill_dir in "$HOME_DIR"/skills/*; do
   [ -d "$skill_dir" ] || continue
   name="$(basename "$skill_dir")"
   target_link="$CODEX_DIR/ai-trading-$name"
@@ -60,7 +60,7 @@ done
 echo ""
 echo "✅ Codex 安装完成（使用符号链接）！"
 echo ""
-echo "📚 源文件位置: $HOME_DIR/codex-skills/"
+echo "📚 源文件位置: $HOME_DIR/skills/"
 echo "🔗 符号链接位置: $CODEX_DIR/ai-trading-*"
 echo ""
 echo "💡 优点："
