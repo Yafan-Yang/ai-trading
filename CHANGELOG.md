@@ -126,9 +126,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- **Three-scenario DCF valuation tool** (`valuation.py`) - Pure offline calculation
+  - Optimistic / base / pessimistic cash-flow discounting
+  - Decimal precision, Gordon terminal value model
+  - Optional per-share intrinsic value when share count provided
+  - 8 unit tests including hand-verified DCF case
+- **Cross-verification in fundamentals skill** - Market cap sanity check
+  - Reuses existing `verify.py market-cap` + `verify.py cross`
+  - Flags data discrepancy when hand-calculated vs reported values diverge >2%
+
+### Changed
+- `skills/fundamentals.md` - Added optional DCF cross-validation step and multi-source market-cap verification
+
+### Notes
+- `cross_verify.py` was NOT created as a separate tool — its planned features (market-cap verification, PE cross-check, Benford's Law) already exist in `verify.py` and `bias_check.py`. Wired the existing capabilities into the fundamentals workflow instead of duplicating them.
+
 ### Planned
-- Multi-source cross-verification tool (`cross_verify.py`)
-- Three-scenario DCF valuation model (`valuation.py`)
+- (none — P3 roadmap items delivered via existing tools where possible)
 
 ---
 

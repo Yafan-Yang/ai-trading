@@ -20,6 +20,13 @@ __AITRADING_HOME__/.venv/bin/python __AITRADING_HOME__/tools/verify.py pb --pric
 ```
 若你在报告中做任何除法/乘法估算，一律改用 `verify.py calc "<表达式>"` 计算，不要心算。
 
+**多源交叉验证**：关键数据用两个独立来源比对，防止单一数据源错误。例如市值——用「股价×总股本」手算，再与工具返回的报告市值比对：
+```bash
+__AITRADING_HOME__/.venv/bin/python __AITRADING_HOME__/tools/verify.py market-cap --price <最新价> --shares <总股本>
+__AITRADING_HOME__/.venv/bin/python __AITRADING_HOME__/tools/verify.py cross --a <手算市值> --b <报告市值> --tol 0.02
+```
+若 `cross` 返回"不一致"，在报告中标注数据存疑，提示读者核实。
+
 ## 第三步：基于真实数据分析
 - **盈利能力**：ROE、ROA、毛利率、净利率
 - **成长性**：营收增长率、归母净利增长率
@@ -27,7 +34,16 @@ __AITRADING_HOME__/.venv/bin/python __AITRADING_HOME__/tools/verify.py pb --pric
 - **估值**：PE(TTM)、PB、PS 与行业/历史比较，判断当前股价被**低估**还是**高估**
 - **合理价位区间**：结合估值给出目标价（使用正确货币单位：A股 ¥、美股/港股 $/HK$）
 
-🚫 严禁回复“无法确定目标价”或“需要更多信息”——必须基于数据给出具体区间。
+🚫 严禁回复”无法确定目标价”或”需要更多信息”——必须基于数据给出具体区间。
+
+## 第三步补充：DCF 交叉验证（可选，当有自由现金流数据时）
+若能从财报估算自由现金流，用估值工具做三情景 DCF，与上面的相对估值互相印证：
+```bash
+__AITRADING_HOME__/.venv/bin/python __AITRADING_HOME__/tools/valuation.py \
+  --fcf <当前自由现金流> --shares <总股本> --discount <WACC> --terminal <永续增长率> \
+  --optimistic <乐观增长率,逗号分隔> --base <基准增长率> --pessimistic <悲观增长率> --json
+```
+增长率假设须结合历史增速与行业前景，在报告中说明假设依据。DCF 结果作为相对估值（PE/PB）的补充参照，不单独作为结论。
 
 ## 第四步：按此格式输出（中文）
 ```
