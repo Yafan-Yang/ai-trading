@@ -177,10 +177,27 @@ npx skills add Yafan-Yang/ai-trading -a claude-code -a cursor
 
 ## Skills 列表
 
+skills 按投研流程分层，**大多数场景从主入口开始即可**，无需记住全部命令。
+
+### 🎯 主入口（先用这两个）
+
 | Skill | 功能 | 时长 |
 |-------|------|------|
-| `analyze` | 完整多智能体分析流水线 | ~5分钟 |
-| `quick` | 60秒快照（单代理） | ~1分钟 |
+| `analyze` | 完整多智能体分析流水线（自动编排下方所有分析师+辩论） | ~5分钟 |
+| `quick` | 60秒快照（单代理，快速判断） | ~1分钟 |
+
+### 🔬 流程扩展（选股前 / 持有后）
+
+| Skill | 功能 | 时长 |
+|-------|------|------|
+| `industry-scan` | 行业扫描 — 扫描板块成分股，初筛候选清单（选股前，仅A股） | ~2分钟 |
+| `moat-analysis` | 护城河专项 — 四维竞争优势评分与可持续性 | ~3分钟 |
+| `alert-monitor` | 持仓异动监控 — 价格与基本面背离诊断（持有后） | ~2分钟 |
+
+### 🧩 单维度钻取（想单独看某一面时）
+
+| Skill | 功能 | 时长 |
+|-------|------|------|
 | `market` | 技术面分析（趋势、指标） | ~2分钟 |
 | `fundamentals` | 基本面分析（财务、估值） | ~2分钟 |
 | `news` | 新闻面分析 | ~2分钟 |
@@ -188,6 +205,8 @@ npx skills add Yafan-Yang/ai-trading -a claude-code -a cursor
 | `china` | A股专属视角（政策/资金/涨跌停） | ~2分钟 |
 | `debate` | 多空辩论 | ~3分钟 |
 | `risk-panel` | 风险三方辩论 | ~3分钟 |
+
+> 典型流程：`industry-scan`（选股）→ `analyze` / `moat-analysis`（深研）→ `alert-monitor`（持有监控）
 
 ## 代码格式
 
@@ -254,6 +273,13 @@ $PY ~/.ai-trading/tools/news_fetch.py 600519 --macro --json
 
 # 数字校验（Decimal）
 $PY ~/.ai-trading/tools/verify.py pe --price 1193 --eps 66
+
+# 反偏见检查（8条红线 + 逆向分析 + 信息丰富度评级）
+$PY ~/.ai-trading/tools/bias_check.py --json
+
+# 行业扫描（A股板块成分股初筛）
+$PY ~/.ai-trading/tools/industry_scan.py --list
+$PY ~/.ai-trading/tools/industry_scan.py 白酒 --top 20 --json
 
 # 导出 PDF
 $PY ~/.ai-trading/tools/export_pdf.py reports/ai-trading/report.md

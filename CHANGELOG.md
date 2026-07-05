@@ -52,6 +52,31 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Support for custom installation directories via `AITRADING_HOME`
 - Configurable caching via `AITRADING_CACHE` and `AITRADING_NOCACHE`
 
+## [1.2.0] - 2026-07-03
+
+### Added
+- **Industry scan skill** (`industry-scan`) - Screen A-share sector constituents
+  - New tool `industry_scan.py` with retry + daily cache
+  - Lists all industry boards; scans constituents with market cap / PE pre-filter
+  - Falls back to THS data source when Eastmoney board API is unavailable
+  - Positioned at the front of the workflow (stock selection stage)
+- **Moat analysis skill** (`moat-analysis`) - Dedicated competitive-advantage assessment
+  - Four-dimension scoring: network effect / cost advantage / switching cost / intangibles
+  - Financial-evidence-backed scoring (gross margin, ROE, net margin)
+  - Sustainability projection (5-year breach probability, competitor comparison)
+- **Portfolio alert skill** (`alert-monitor`) - Price-vs-fundamentals divergence diagnosis
+  - Computes deviation from fair value; attributes cause (fundamental / sentiment / black swan)
+  - Gives actionable add/hold/reduce/stop-loss recommendation
+  - Positioned after analysis (holding stage)
+
+### Changed
+- README skills list reorganized into layers (main entry / workflow extensions / single-dimension) to reduce cognitive load as skill count grows
+- Total skills: 9 → 12
+
+### Notes
+- `analyze` main entry unchanged — new skills extend the workflow upstream/downstream without adding weight to the core pipeline
+- Eastmoney board constituent API is intermittently unreachable; `industry_scan.py` degrades gracefully with a readable message rather than crashing
+
 ## [1.1.0] - 2026-07-03
 
 ### Added
@@ -102,10 +127,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Planned
-- Industry screening skill (`industry-scan.md`)
-- Moat analysis skill (`moat-analysis.md`)
-- Portfolio alert monitoring skill (`alert-monitor.md`)
 - Multi-source cross-verification tool (`cross_verify.py`)
+- Three-scenario DCF valuation model (`valuation.py`)
 
 ---
 
