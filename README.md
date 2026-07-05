@@ -50,9 +50,9 @@ decimal.Decimal('1193') / Decimal('66')  # 18.08
 
 ## 工作流程
 
-![ai-trading 多智能体投研流水线](docs/assets/ai-trading-workflow.drawio.png)
+![ai-trading 架构工作流](docs/assets/ai-trading-architecture-workflow-tradingagents-style.png)
 
-可编辑源文件：[docs/assets/ai-trading-workflow.drawio](docs/assets/ai-trading-workflow.drawio)
+精确流程图源文件：[docs/assets/ai-trading-workflow.drawio](docs/assets/ai-trading-workflow.drawio)
 
 主链路：输入股票代码 → 五分析师并行 → 多空辩论 → 交易员提案 → 风险三方辩论 → 质量控制 → 风险经理拍板 → Markdown/PDF 研报。
 
