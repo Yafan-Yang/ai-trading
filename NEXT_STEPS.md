@@ -4,10 +4,10 @@
 
 ## ✅ 已完成的工作
 
-- ✅ 9个 skills 已转换为多平台格式
+- ✅ 12个 skills 已转换为多平台格式
 - ✅ 支持 Claude Code、Codex、Cursor 等 70+ 智能体
 - ✅ 安装脚本完善（3种安装方式）
-- ✅ 文档齐全（8个文档文件）
+- ✅ 文档齐全
 - ✅ 测试验证通过
 - ✅ 优化方案已保留
 
@@ -43,7 +43,6 @@ git add .
 git commit -m "feat: multi-platform skill support for Claude, Codex, and 70+ agents
 
 - Add skills.sh standard format (.agents/skills/)
-- Add Codex format (codex-skills/)
 - Implement sync script (scripts/sync-skills.py)
 - Add 3 installation methods (Claude/Codex/Standard)
 - Add comprehensive documentation (INSTALL, PUBLISH, QUICKSTART, etc.)
@@ -87,7 +86,7 @@ npx skills add Yafan-Yang/ai-trading --list
 npx skills add Yafan-Yang/ai-trading --skill analyze
 ```
 
-如果能正常列出 9 个 skills，说明发布成功！✅
+如果能正常列出 12 个 skills，说明发布成功！✅
 
 ### 5️⃣ 等待 skills.sh 收录
 
@@ -114,7 +113,7 @@ npx skills add Yafan-Yang/ai-trading --skill analyze
    git push origin v1.0.0
    ```
    
-   然后在 GitHub 页面创建 Release，内容参考 `SUMMARY.md`
+   然后在 GitHub 页面创建 Release，内容参考 `CHANGELOG.md`
 
 3. **添加使用截图**
    
@@ -198,7 +197,7 @@ npx skills add Yafan-Yang/ai-trading --skill analyze
    if git diff --cached --name-only | grep -q "skills/.*\.md"; then
        echo "🔄 Detected changes in skills/, running sync..."
        python3 scripts/sync-skills.py
-       git add .agents/skills/ codex-skills/
+       git add .agents/skills/
    fi
    HOOK
    chmod +x .git/hooks/pre-commit
