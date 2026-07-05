@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="drawio" version="30.2.4">
+  <diagram id="ai-trading-workflow" name="ai-trading workflow">
+    <mxGraphModel dx="1422" dy="794" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2040" pageHeight="820" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="ai-trading 多智能体投研流水线" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=30;fontStyle=1;fontColor=#1F2937;" vertex="1" parent="1">
+          <mxGeometry x="40" y="30" width="1960" height="44" as="geometry" />
+        </mxCell>
+        <mxCell id="subtitle" value="从真实数据取数到多角色辩论、质量控制和结构化研报输出" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=15;fontColor=#4B5563;" vertex="1" parent="1">
+          <mxGeometry x="40" y="74" width="1960" height="28" as="geometry" />
+        </mxCell>
+        <mxCell id="input" value="输入股票代码&#xa;A股 / 港股 / 美股" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=15;fontStyle=1;fontColor=#1F2937;spacing=10;" vertex="1" parent="1">
+          <mxGeometry x="50" y="300" width="190" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="stage1" value="阶段 1：五分析师并行" style="swimlane;html=1;startSize=34;rounded=1;arcSize=6;fillColor=#f8fafc;strokeColor=#64748b;fontSize=16;fontStyle=1;fontColor=#1F2937;collapsible=0;" vertex="1" parent="1">
+          <mxGeometry x="300" y="140" width="490" height="390" as="geometry" />
+        </mxCell>
+        <mxCell id="analyst-market" value="技术面&#xa;market" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=14;fontStyle=1;fontColor=#1F2937;" vertex="1" parent="stage1">
+          <mxGeometry x="30" y="60" width="190" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="analyst-fundamentals" value="基本面&#xa;fundamentals" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=14;fontStyle=1;fontColor=#1F2937;" vertex="1" parent="stage1">
+          <mxGeometry x="270" y="60" width="190" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="analyst-news" value="新闻面&#xa;news" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=14;fontStyle=1;fontColor=#1F2937;" vertex="1" parent="stage1">
+          <mxGeometry x="30" y="160" width="190" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="analyst-sentiment" value="情绪面&#xa;sentiment" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=14;fontStyle=1;fontColor=#1F2937;" vertex="1" parent="stage1">
+          <mxGeometry x="270" y="160" width="190" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="analyst-china" value="A股视角&#xa;china（条件启用）" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=14;fontStyle=1;fontColor=#1F2937;" vertex="1" parent="stage1">
+          <mxGeometry x="150" y="260" width="190" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="evidence" value="子报告汇总&#xa;形成证据池" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=15;fontStyle=1;fontColor=#1F2937;spacing=10;" vertex="1" parent="1">
+          <mxGeometry x="870" y="300" width="190" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="debate" value="阶段 2&#xa;多空辩论&#xa;研究经理综合" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=15;fontStyle=1;fontColor=#1F2937;spacing=8;" vertex="1" parent="1">
+          <mxGeometry x="1130" y="300" width="210" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="trader" value="阶段 3&#xa;交易员提案&#xa;买入 / 持有 / 卖出" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=15;fontStyle=1;fontColor=#1F2937;spacing=8;" vertex="1" parent="1">
+          <mxGeometry x="1410" y="300" width="220" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="risk-qc" value="风险与质量控制" style="swimlane;html=1;startSize=34;rounded=1;arcSize=6;fillColor=#fff7ed;strokeColor=#c2410c;fontSize=16;fontStyle=1;fontColor=#1F2937;collapsible=0;" vertex="1" parent="1">
+          <mxGeometry x="1700" y="210" width="260" height="300" as="geometry" />
+        </mxCell>
+        <mxCell id="risk-panel" value="阶段 4&#xa;激进 / 保守 / 中性&#xa;风险三方辩论" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fillColor=#f8cecc;strokeColor=#b85450;fontSize=14;fontStyle=1;fontColor=#1F2937;spacing=8;" vertex="1" parent="risk-qc">
+          <mxGeometry x="30" y="60" width="200" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="quality" value="阶段 4.5&#xa;偏差检测 / 反向分析&#xa;估值交叉验证" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=14;fontStyle=1;fontColor=#1F2937;spacing=8;" vertex="1" parent="risk-qc">
+          <mxGeometry x="30" y="180" width="200" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="report" value="阶段 5-6&#xa;风险经理拍板&#xa;Markdown / PDF 研报" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=15;fontStyle=1;fontColor=#1F2937;spacing=8;" vertex="1" parent="1">
+          <mxGeometry x="1800" y="610" width="190" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="tools" value="真实数据工具与免费数据源" style="swimlane;html=1;startSize=30;rounded=1;arcSize=6;fillColor=#f5f5f5;strokeColor=#666666;fontSize=15;fontStyle=1;fontColor=#1F2937;collapsible=0;" vertex="1" parent="1">
+          <mxGeometry x="300" y="610" width="490" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="tool-market" value="market_data.py" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fillColor=#ffffff;strokeColor=#9ca3af;fontSize=13;fontColor=#1F2937;" vertex="1" parent="tools">
+          <mxGeometry x="30" y="48" width="130" height="34" as="geometry" />
+        </mxCell>
+        <mxCell id="tool-fundamentals" value="fundamentals.py" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fillColor=#ffffff;strokeColor=#9ca3af;fontSize=13;fontColor=#1F2937;" vertex="1" parent="tools">
+          <mxGeometry x="180" y="48" width="130" height="34" as="geometry" />
+        </mxCell>
+        <mxCell id="tool-news" value="news_fetch.py" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fillColor=#ffffff;strokeColor=#9ca3af;fontSize=13;fontColor=#1F2937;" vertex="1" parent="tools">
+          <mxGeometry x="330" y="48" width="130" height="34" as="geometry" />
+        </mxCell>
+        <mxCell id="tool-sources" value="akshare / yfinance / WebSearch" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=13;fontColor=#4B5563;" vertex="1" parent="tools">
+          <mxGeometry x="60" y="92" width="370" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="safeguards" value="数据严谨性保障" style="swimlane;html=1;startSize=30;rounded=1;arcSize=6;fillColor=#f8fafc;strokeColor=#64748b;fontSize=15;fontStyle=1;fontColor=#1F2937;collapsible=0;" vertex="1" parent="1">
+          <mxGeometry x="870" y="610" width="760" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="guard-decimal" value="Decimal 精确计算&#xa;避免估值心算错误" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fillColor=#ffffff;strokeColor=#9ca3af;fontSize=13;fontColor=#1F2937;" vertex="1" parent="safeguards">
+          <mxGeometry x="30" y="50" width="200" height="58" as="geometry" />
+        </mxCell>
+        <mxCell id="guard-cross" value="多源交叉验证&#xa;市值 / PE / ROE 复核" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fillColor=#ffffff;strokeColor=#9ca3af;fontSize=13;fontColor=#1F2937;" vertex="1" parent="safeguards">
+          <mxGeometry x="280" y="50" width="200" height="58" as="geometry" />
+        </mxCell>
+        <mxCell id="guard-bias" value="本福特与偏差检测&#xa;反向分析失败场景" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fillColor=#ffffff;strokeColor=#9ca3af;fontSize=13;fontColor=#1F2937;" vertex="1" parent="safeguards">
+          <mxGeometry x="530" y="50" width="200" height="58" as="geometry" />
+        </mxCell>
+        <mxCell id="legend" value="图例" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#9ca3af;verticalAlign=top;fontSize=13;fontStyle=1;fontColor=#1F2937;" vertex="1" parent="1">
+          <mxGeometry x="50" y="610" width="190" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="legend-analyst-swatch" value="" style="rounded=0;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="legend">
+          <mxGeometry x="18" y="34" width="26" height="16" as="geometry" />
+        </mxCell>
+        <mxCell id="legend-analyst-label" value="分析师并行" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;fontColor=#1F2937;strokeColor=none;fillColor=none;" vertex="1" parent="legend">
+          <mxGeometry x="54" y="32" width="110" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="legend-debate-swatch" value="" style="rounded=0;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="legend">
+          <mxGeometry x="18" y="60" width="26" height="16" as="geometry" />
+        </mxCell>
+        <mxCell id="legend-debate-label" value="辩论与提案" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;fontColor=#1F2937;strokeColor=none;fillColor=none;" vertex="1" parent="legend">
+          <mxGeometry x="54" y="58" width="110" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="legend-risk-swatch" value="" style="rounded=0;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="legend">
+          <mxGeometry x="18" y="86" width="26" height="16" as="geometry" />
+        </mxCell>
+        <mxCell id="legend-risk-label" value="风险控制" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;fontColor=#1F2937;strokeColor=none;fillColor=none;" vertex="1" parent="legend">
+          <mxGeometry x="54" y="84" width="110" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-input-stage1" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#64748b;strokeWidth=2;endArrow=block;endFill=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="input" target="stage1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-stage1-evidence" value="5 份子报告" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#64748b;strokeWidth=2;endArrow=block;endFill=1;labelBackgroundColor=#ffffff;fontSize=12;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="stage1" target="evidence">
+          <mxGeometry x="-0.12" y="-18" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge-evidence-debate" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#64748b;strokeWidth=2;endArrow=block;endFill=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="evidence" target="debate">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-debate-trader" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#64748b;strokeWidth=2;endArrow=block;endFill=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="debate" target="trader">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-trader-risk" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#64748b;strokeWidth=2;endArrow=block;endFill=1;exitX=1;exitY=0.45;exitDx=0;exitDy=0;entryX=0;entryY=0.35;entryDx=0;entryDy=0;" edge="1" parent="1" source="trader" target="risk-panel">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-risk-quality" value="风险意见进入质控" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#64748b;strokeWidth=2;endArrow=block;endFill=1;labelBackgroundColor=#ffffff;fontSize=12;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="risk-qc" source="risk-panel" target="quality">
+          <mxGeometry x="0.02" y="-8" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge-quality-report" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#64748b;strokeWidth=2;endArrow=block;endFill=1;exitX=0.7;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="quality" target="report">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1880" y="560" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge-tools-stage1" value="真实行情 / 财务 / 新闻" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#9ca3af;dashed=1;strokeWidth=2;endArrow=block;endFill=1;labelBackgroundColor=#ffffff;fontSize=12;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="tools" target="stage1">
+          <mxGeometry x="-0.1" y="-10" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge-safeguards-quality" value="复核结果" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#9ca3af;dashed=1;strokeWidth=2;endArrow=block;endFill=1;labelBackgroundColor=#ffffff;fontSize=12;exitX=0.85;exitY=0;exitDx=0;exitDy=0;entryX=0.1;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="safeguards" target="quality">
+          <mxGeometry x="-0.2" y="-10" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

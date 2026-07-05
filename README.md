@@ -50,27 +50,11 @@ decimal.Decimal('1193') / Decimal('66')  # 18.08
 
 ## 工作流程
 
-```
-输入股票代码
-    ↓
-[阶段 1] 五分析师并行（4倍信息量）
-  技术面 + 基本面 + 新闻面 + 情绪面 + A股视角
-    ↓
-[阶段 2] 多空辩论
-  🐂 看涨 vs 🐻 看跌 → 🧑‍⚖️ 研究经理综合
-    ↓
-[阶段 3] 交易员提案
-  买入/持有/卖出 + 目标价 + 置信度
-    ↓
-[阶段 4] 风险三方辩论
-  🔥 激进 vs 🛡️ 保守 vs ⚖️ 中性
-    ↓
-[阶段 5] 风险经理拍板
-  最终决策 + 目标价区间 + 仓位建议
-    ↓
-[阶段 6] 生成结构化研报
-  Markdown + 可选 PDF 导出
-```
+![ai-trading 多智能体投研流水线](docs/assets/ai-trading-workflow.drawio.png)
+
+可编辑源文件：[docs/assets/ai-trading-workflow.drawio](docs/assets/ai-trading-workflow.drawio)
+
+主链路：输入股票代码 → 五分析师并行 → 多空辩论 → 交易员提案 → 风险三方辩论 → 质量控制 → 风险经理拍板 → Markdown/PDF 研报。
 
 ## 强制决策输出
 
