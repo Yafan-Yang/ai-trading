@@ -112,13 +112,6 @@ cd ai-trading
 bash scripts/install-claude.sh
 ```
 
-**Codex**：
-```bash
-git clone https://github.com/Yafan-Yang/ai-trading.git
-cd ai-trading
-bash scripts/install-codex.sh
-```
-
 ### 📊 Skills 列表
 
 | Skill | 功能 | 时长 |

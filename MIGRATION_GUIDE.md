@@ -14,15 +14,10 @@
 
 ### 新版本（多平台）
 ```
-# 标准格式（70+ 智能体）
+# 标准格式（70+ 智能体，包括 Codex）
 .agents/skills/
 ├── analyze/SKILL.md
 ├── quick/SKILL.md
-└── ...
-
-# Codex 格式
-codex-skills/
-├── analyze/SKILL.md
 └── ...
 
 # Claude Code（保持兼容）
@@ -47,8 +42,7 @@ python3 scripts/sync-skills.py
 ```
 
 这会生成：
-- `.agents/skills/` - skills.sh 标准格式
-- `codex-skills/` - Codex 专用格式
+- `.agents/skills/` - skills.sh 标准格式（兼容所有智能体包括 Codex）
 
 ### 3. 选择安装方式
 
@@ -75,8 +69,7 @@ bash install.sh
 
 # 或单独安装
 bash scripts/install-claude.sh    # Claude Code
-bash scripts/install-codex.sh     # Codex
-bash scripts/install-standard.sh  # 标准格式
+bash scripts/install-standard.sh  # 标准格式（推荐，兼容所有智能体）
 ```
 
 ### 4. 验证安装
@@ -87,16 +80,10 @@ bash scripts/install-standard.sh  # 标准格式
 /ai-trading:analyze 600519
 ```
 
-#### Codex
-```bash
-codex
-# 然后输入：使用 ai-trading analyze 分析腾讯
-```
-
-#### Cursor / 其他
+#### Codex / Cursor / 其他
 直接在对话中提及：
 ```
-用 ai-trading 分析 AAPL
+用 analyze 分析 AAPL
 ```
 
 ## 清理旧安装（可选）
@@ -151,8 +138,7 @@ npx skills update ai-trading
 ```
 skills/*.md
     ↓ (sync-skills.py)
-    ├→ .agents/skills/    (标准格式)
-    └→ codex-skills/      (Codex 格式)
+    └→ .agents/skills/    (标准格式，兼容所有智能体)
 ```
 
 **永远只修改 `skills/*.md`**，然后运行 `sync-skills.py` 重新生成。

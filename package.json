@@ -21,7 +21,6 @@
   "scripts": {
     "sync": "python3 scripts/sync-skills.py",
     "install:claude": "bash scripts/install-claude.sh",
-    "install:codex": "bash scripts/install-codex.sh",
     "install:standard": "bash scripts/install-standard.sh"
   },
   "files": [

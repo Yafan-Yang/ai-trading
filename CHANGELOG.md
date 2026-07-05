@@ -21,8 +21,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - `risk-panel` - Three-way risk debate (~3 min)
 - **Three installation methods**
   - Claude Code: `bash scripts/install-claude.sh`
-  - Codex: `bash scripts/install-codex.sh`
-  - Universal: `npx skills add Yafan-Yang/ai-trading`
+  - Universal: `npx skills add Yafan-Yang/ai-trading` (recommended, supports 70+ agents including Codex)
+  - Standard format: `bash scripts/install-standard.sh`
 - **Python data tools** for standalone usage
   - `market_data.py` - Price data + technical indicators
   - `fundamentals.py` - Financial statements + valuation metrics

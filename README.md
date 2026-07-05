@@ -134,26 +134,6 @@ benford_check(revenues)  # ❌ χ² = 42.1 > 15.51 可疑
 
 ## 安装
 
-### Claude Code
-
-```bash
-git clone https://github.com/Yafan-Yang/ai-trading.git
-cd ai-trading
-bash scripts/install-claude.sh
-```
-
-使用：`/ai-trading:analyze 600519`
-
-### Codex
-
-```bash
-git clone https://github.com/Yafan-Yang/ai-trading.git
-cd ai-trading
-bash scripts/install-codex.sh
-```
-
-重启 Codex 后生效。使用：自然语言调用，例如 "使用 ai-trading analyze 分析腾讯"
-
 ### 通用安装（推荐）
 
 支持 Claude Code、Codex、Cursor、OpenCode、Cline、Windsurf 等 70+ 智能体。
@@ -174,6 +154,16 @@ npx skills add Yafan-Yang/ai-trading -g
 # 安装到特定智能体
 npx skills add Yafan-Yang/ai-trading -a claude-code -a cursor
 ```
+
+### Claude Code
+
+```bash
+git clone https://github.com/Yafan-Yang/ai-trading.git
+cd ai-trading
+bash scripts/install-claude.sh
+```
+
+使用：`/ai-trading:analyze 600519`
 
 ## Skills 列表
 

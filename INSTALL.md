@@ -61,10 +61,7 @@ bash install.sh
 # 仅安装到 Claude Code
 bash scripts/install-claude.sh
 
-# 仅安装到 Codex
-bash scripts/install-codex.sh
-
-# 安装标准格式（兼容多平台）
+# 安装标准格式（兼容多平台，推荐）
 bash scripts/install-standard.sh
 ```
 
@@ -79,17 +76,7 @@ bash scripts/install-standard.sh
 └── ...
 ```
 
-### Codex
-```
-~/.codex/skills/
-├── ai-trading-analyze/
-│   └── SKILL.md
-├── ai-trading-quick/
-│   └── SKILL.md
-└── ...
-```
-
-### skills.sh 标准格式（Cursor, OpenCode, 等）
+### skills.sh 标准格式（Codex, Cursor, OpenCode, 等）
 ```
 ~/.agents/skills/          # 全局安装
 或
@@ -129,17 +116,10 @@ claude
 /ai-trading:analyze 600519
 ```
 
-### Codex
-```bash
-codex
-# 在对话中输入
-使用 ai-trading analyze 分析腾讯
+### Codex / Cursor / 其他
+直接在 AI 对话中提及：
 ```
-
-### Cursor / 其他
-直接在编辑器的 AI 对话中提及：
-```
-用 ai-trading 分析一下这只股票：AAPL
+用 analyze 分析一下这只股票：AAPL
 ```
 
 ## 卸载
@@ -154,10 +134,7 @@ npx skills remove ai-trading
 # Claude Code
 rm -rf ~/.claude/commands/ai-trading/
 
-# Codex
-rm -rf ~/.codex/skills/ai-trading-*
-
-# 标准格式
+# 标准格式（Codex / Cursor / 等）
 rm -rf ~/.agents/skills/analyze
 rm -rf ~/.agents/skills/quick
 # ... 其他 skills
@@ -190,7 +167,7 @@ npx skills list
 ### Q: 可以同时安装到多个智能体吗？
 可以！使用 `bash install.sh` 选择选项 1，或者用 skills.sh CLI：
 ```bash
-npx skills add . -a claude-code -a codex -a cursor
+npx skills add . -a claude-code -a cursor
 ```
 
 ### Q: PDF 导出失败怎么办？
@@ -226,8 +203,6 @@ bash install.sh
 export CLAUDE_COMMANDS_DIR=/custom/path/.claude/commands
 bash scripts/install-claude.sh
 ```
-
-### 关闭数据缓存
 ```bash
 export AITRADING_NOCACHE=1
 ```
